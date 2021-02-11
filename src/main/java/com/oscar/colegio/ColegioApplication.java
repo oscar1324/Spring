@@ -1,4 +1,4 @@
-package com.carol.colegio;
+package com.oscar.colegio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

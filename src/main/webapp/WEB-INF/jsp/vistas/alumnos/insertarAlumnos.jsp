@@ -15,7 +15,7 @@
 </header>
 
 
-<%@include file="/menu.html" %>
+<%@include file="../../menu.html" %>
 <h2>Insertar alumno</h2>
 	<div class="container">
 		<div class="form">
