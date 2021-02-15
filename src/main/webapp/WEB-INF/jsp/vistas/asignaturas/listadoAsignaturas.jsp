@@ -14,7 +14,7 @@
 </head>
 <body>
 	<h2>Gestión de colegio</h2>
-	<%@include file="/menu.html"%>
+	<%@include file="../../menu.html"%>
 	
 	<div class="container">
 		<h2>Listado de asignaturas</h2>
@@ -25,11 +25,7 @@
 				<label for="nombre">Nombre Asignatura</label> 
 				<input type="text" id="nombre" name="nombre">
 				<br> 
-				<label for="curso">Curso</label> 
-				<input type="text" id="curso" name="curso">
-				<label for="curso">Tasa</label> 
-				<input type="text" id="tasa" name="tasa">
-				
+
 				<input type="submit" value="Buscar">
 			</form>
 
@@ -40,16 +36,14 @@
 		<tr>
 			<th>Id</th>
 			<th>Nombre Asignatura</th>
-			<th>Curso</th>
-			<th>Tasa</th>
+
 		</tr>
 		
 		<c:forEach items="${lista}" var="asignatura">
 			<tr>
 				<td> ${asignatura.id}</td>
 				<td> ${asignatura.nombre}</td>
-				<td> ${asignatura.curso }</td>
-				<td> ${asignatura.tasa }</td>
+				
 			</tr>
 		</c:forEach>
 

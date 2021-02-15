@@ -14,7 +14,7 @@
 <h2>Gestión de Colegio</h2>
 </header>
 
-<%@include file="/menu.html" %>
+<%@include file="../../menu.html" %>
 
 	<div class="container">
 		<h2>Insertar asignatura</h2>
