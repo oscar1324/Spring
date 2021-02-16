@@ -33,14 +33,14 @@ public class NotasController {
 	@PostMapping(value ="insertarnota")
 	public String InsertarNotas(
 			@RequestParam(value = "id", required = false) Integer id,
-			@RequestParam("alumno") AlumnoEntity alumnos,
-			@RequestParam("asignatura")AsignaturasEntity asignaturas,
+			@RequestParam("alumnos") Integer idalumnos,
+			@RequestParam("asignatura")Integer idasignaturas,
 			@RequestParam(value ="nota")Double nota,
 			@RequestParam("fecha")String fecha) {
 		
 
-		NotaEntity notas = new NotaEntity(id, alumnos, asignaturas, nota, fecha);
-		NT.save(notas);
+		//NotaEntity notas = new NotaEntity(id, idalumnos, idasignaturas, nota, fecha);
+		//NT.save(notas);
 		return "vistas/notas/insertarNotas";
 	}
 	
