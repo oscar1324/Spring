@@ -38,13 +38,14 @@ public class CombosDAOImpl implements CombosDAO{
 		return listaAlumnos;
 	}
 
-//	@Override
-//	public List<ComboDTO> comboAsignaturas() {
-//		Iterable<AsignaturasEntity> listaEntidadesAsignaturas = AR.findAll();
-//		List<ComboDTO> listaAsignaturas = mapeoEntidadAsignaturaComboDTO(listaEntidadesAsignaturas);
-//		return listaAsignaturas;
-//	}
+	@Override
+	public List<ComboDTO> comboAsignaturas() {
+		Iterable<AsignaturasEntity> listaEntidadesAsignaturas = AR.findAll();
+		List<ComboDTO> listaAsignaturas = mapeoEntidadAsignaturaComboDTO(listaEntidadesAsignaturas);
+		return listaAsignaturas;
+	}
 	
+//	------------------------------------------------------------------------------------------------------------------
 	private List<ComboDTO> mapeoEntidadMunicipioComboDTO(Iterable<MunicipiosEntity> listaEntidadesMunicipios){
 		List<ComboDTO> listaMunicipios = new ArrayList<ComboDTO>();
 		for(MunicipiosEntity m: listaEntidadesMunicipios) {
@@ -61,18 +62,13 @@ public class CombosDAOImpl implements CombosDAO{
 		return listaAlumnos;
 	}
 
-	@Override
-	public List<ComboDTO> comboAsignaturas() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
-//	private List<ComboDTO> mapeoEntidadAsignaturaComboDTO(Iterable<AlumnoEntity> mapeoEntidadAsignaturaComboDTO){
-//		List<ComboDTO> listaAsignaturas = new ArrayList<ComboDTO>();
-//		for(AlumnoEntity m: mapeoEntidadAsignaturaComboDTO) {
-//			listaAsignaturas.add(new ComboDTO(m.getId(), m.getNombre()));
-//		}
-//		return listaAsignaturas;
-//	}
+	private List<ComboDTO> mapeoEntidadAsignaturaComboDTO(Iterable<AsignaturasEntity> listaEntidadesAsignaturas){
+		List<ComboDTO> listaAsignaturas = new ArrayList<ComboDTO>();
+		for(AsignaturasEntity m: listaEntidadesAsignaturas) {
+			listaAsignaturas.add(new ComboDTO(m.getId(), m.getnombre()));
+		}
+		return listaAsignaturas;
+	}
 
 }

@@ -16,7 +16,7 @@
 </header>
 
 
-<%@include file="/menu.html" %>
+<%@include file="../../menu.html" %>
 <h2>Insertar Notas</h2>
 	<div class="container">
 		<div class="form">
@@ -40,7 +40,7 @@
 				<input type="nota" id="nota" name="nota">
 				
 				<label for="fecha">Fecha</label>
-				<input type="date" id="fehca" name="fecha">
+				<input type="date" id="fecha" name="fecha">
 				<br>
 				
 				<input type="submit" value="Enviar">
