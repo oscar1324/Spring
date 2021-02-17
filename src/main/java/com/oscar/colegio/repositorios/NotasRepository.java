@@ -1,18 +1,30 @@
 package com.oscar.colegio.repositorios;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
+import com.oscar.colegio.dtos.NotaDTO;
 import com.oscar.colegio.entities.NotaEntity;
 
 public interface NotasRepository extends CrudRepository<NotaEntity, Integer> {
 	
-	/*String jpql = "select new com.kike.colegio.dtos.NotaDTO(n.id, a.id, a.nombre, asig.id, asig.nombreAsignatura, n.nota, n.fecha) "
-		+ "FROM NotasEntity n JOIN AlumnoEntity a ON n.alumnos.id = a.id " 
-		+ "JOIN AsignaturasEntity asig ON n.asignaturas.id = asig.id "
-		+ "WHERE CAST(a.id AS string) LIKE :idAlumno AND a.nombre LIKE :nombre AND asig.nombreAsignatura LIKE :asignatura "
-		+ "AND CAST(n.nota AS string) LIKE :nota AND n.fecha LIKE :fecha";
-	 * */
-	//@Query(value = "select new com.oscar.dtos.NotaDTO ()")
+	@Query(value = "select new com.oscar.colegio.dtos.NotaDTO (a.id, m.id, m.nombre, asig.id, asig.nombre, a.nota, a.fecha) "
+			+ "FROM com.oscar.colegio.entities.NotaEntity a, com.oscar.colegio.entities.AlumnoEntity m, com.oscar.colegio.entities.AsignaturasEntity asig "
+			+ "WHERE a.alumnos.id = m.id AND a.asignaturas.id=asig.id "
+			+ "AND (m.id LIKE CONCAT('%', :id,'%') or :id is null) "
+			+ "AND (m.nombre LIKE CONCAT ('%', :nombreAlumno, '%') or :nombreAlumno is null) "
+			+ "AND (asig.nombre LIKE CONCAT ('%', :nombreAsignatura, '%') or :nombreAsignatura is null) "
+			+ "AND (a.fecha LIKE CONCAT ('%', :fecha, '%') or :fecha is null) " // error fecha
+			+ "AND (a.nota LIKE CONCAT ('%', :nota, '%') or :nota is null)    ")
+	List<NotaDTO>buscarPorAlumnoAsignaturaNotaFecha(
+			@Param("id") Integer idAlumno, 
+			@Param("nombreAlumno")String nombreAlumno, 
+			@Param("nombreAsignatura") String asignatura, 
+			@Param("nota")Double nota, 
+			@Param("fecha") String fecha);
+
 	
 }

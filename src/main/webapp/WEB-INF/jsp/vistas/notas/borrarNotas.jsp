@@ -26,7 +26,7 @@
 				<input type="text" id="asignatura" name="asignatura">
 				<br> 
 				<label for="fecha">Fecha</label>
-				<input type="date" id="fehca" name="fecha">
+				<input type="date" id="fecha" name="fecha">
 				<input type="submit" value="Enviar">
 			</form>
 		</div>	
@@ -47,7 +47,7 @@
 					<input type="text" id="nota" name="nota" value="${ nota.nota}" readonly>
 					
 					<label for="fecha">Fecha</label>
-					<input type="date" id="fehca" name="fecha" value="${ nota.fecha}" readonly>
+					<input type="date" id="fecha" name="fecha" value="${ nota.fecha}" readonly>
 					
 					<input type="submit" value="Eliminar">
 				</form>

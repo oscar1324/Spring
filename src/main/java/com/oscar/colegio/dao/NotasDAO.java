@@ -6,10 +6,9 @@ import com.oscar.colegio.dtos.NotaDTO;
 
 public interface NotasDAO{
 
-	List<NotaDTO> obtenerTodasNotas();
-	List<NotaDTO> obtenerNotaPorIdNombreAsignaturaNotaFecha(String idAlumno, String nombre, String asignatura, String nota, String fecha); 
+	List<NotaDTO> obtenerNotaPorIdNombreAsignaturaNotaFecha(Integer idAlumno, String nombre, String asignatura, Double nota, String fecha); 
 	List<NotaDTO> obtenerNotaPorNombreAsignaturaFecha(String nombre, String asignatura, String fecha); 
-	Integer insertarNota(String idAlumno, String idAsignatura,String nota, String fecha);
-	Integer actualizarNota(String idNota, String idAlumno, String idAsignatura, String nota, String fecha);
-	Integer eliminarNota(String id);
+	Integer insertarNota(Integer idAlumno, Integer idAsignatura, Double nota, String fecha);
+	Integer actualizarNota(Integer idNota, String idAlumno, String idAsignatura, Double nota, String fecha);
+	Integer eliminarNota(Integer id);
 }

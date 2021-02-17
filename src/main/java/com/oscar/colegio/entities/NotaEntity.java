@@ -58,6 +58,15 @@ public class NotaEntity {
 		this.nota = nota;
 		this.fecha = fecha;
 	}
+	
+	public NotaEntity( AlumnoEntity alumnos, AsignaturasEntity asignaturas, Double nota, String fecha,int id) {
+		super();
+		this.alumnos = alumnos;
+		this.asignaturas = asignaturas;
+		this.nota = nota;
+		this.fecha = fecha;
+		this.id=id;
+	}
 
 	public Integer getId() {
 		return id;
