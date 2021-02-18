@@ -9,6 +9,6 @@ public interface NotasDAO{
 	List<NotaDTO> obtenerNotaPorIdNombreAsignaturaNotaFecha(Integer idAlumno, String nombre, String asignatura, Double nota, String fecha); 
 	List<NotaDTO> obtenerNotaPorNombreAsignaturaFecha(String nombre, String asignatura, String fecha); 
 	Integer insertarNota(Integer idAlumno, Integer idAsignatura, Double nota, String fecha);
-	Integer actualizarNota(Integer idNota, String idAlumno, String idAsignatura, Double nota, String fecha);
-	Integer eliminarNota(Integer id);
+	Integer actualizarNota(Integer idNota, Integer idAlumno, Integer idAsignatura, Double nota, String fecha);
+	Integer eliminarNota(Integer idNota);
 }

@@ -24,25 +24,25 @@ import com.oscar.colegio.repositorios.NotasRepository;
 public class NotasController {
 
 	@Autowired
-	private AlumnoRepository AlumnoR;
+	private AlumnoRepository alumnoR;
 	
 	@Autowired
-	private AsignaturaRepository AsigR;
+	private AsignaturaRepository asigR;
 	
 	@Autowired
-	private NotasDAO NotaImpl;
+	private NotasDAO notasDao;
 	
 	@Autowired
-	private NotasRepository NotaR;
+	private NotasRepository notaR;
 	
 	@Autowired
-	private CombosDAO cc;
+	private CombosDAO combosDao;
 	
 	// INSERTAR -------------------------------------------------------------------------------------------------
 	@GetMapping(value ="insertarnota")
 	public String FormularioInsertar(ModelMap model) {
-		model.addAttribute("listaAlumnos",cc.comboAlumnos());
-		model.addAttribute("listaAsignaturas",cc.comboAsignaturas());
+		model.addAttribute("listaAlumnos",combosDao.comboAlumnos());
+		model.addAttribute("listaAsignaturas",combosDao.comboAsignaturas());
 		return "vistas/notas/insertarNotas";
 	}
 	
@@ -54,7 +54,7 @@ public class NotasController {
 			@RequestParam(value = "fecha", required = false) String fecha, 
 			ModelMap model) {
 		
-		model.addAttribute("resultado", NotaImpl.insertarNota(idAlumno, idAsignatura, nota, fecha));
+		model.addAttribute("resultado", notasDao.insertarNota(idAlumno, idAsignatura, nota, fecha));
 
 		return "vistas/notas/insertarNotas";
 	}
@@ -77,7 +77,7 @@ public class NotasController {
 			ModelMap model) {
 
 
-		model.addAttribute("lista", NotaImpl.obtenerNotaPorIdNombreAsignaturaNotaFecha(idAlumno, nombreAlumno, idasignatura, nota, fecha));
+		model.addAttribute("lista", notasDao.obtenerNotaPorIdNombreAsignaturaNotaFecha(idAlumno, nombreAlumno, idasignatura, nota, fecha));
 
 		return "vistas/notas/listadoNotas";
 	}
@@ -96,10 +96,11 @@ public class NotasController {
 			@RequestParam(value = "fecha", required = false) String fecha, 
 			ModelMap model) {
 
-		List<NotaDTO> listaNotas = NotaR.buscarPorAlumnoAsignaturaNotaFecha(id, alumno, asignatura, null,fecha);
-		model.addAttribute("comboAlumnos", cc.comboAlumnos());
-		model.addAttribute("comboAsignaturas", cc.comboAsignaturas());
+
+		model.addAttribute("comboAlumnos", combosDao.comboAlumnos());
+		model.addAttribute("comboAsignaturas", combosDao.comboAsignaturas());
 		
+		List<NotaDTO> listaNotas = notaR.buscarPorAlumnoAsignaturaNotaFecha(id, alumno, asignatura, null,fecha);
 		model.addAttribute("lista", listaNotas);
 
 		return "vistas/notas/actualizarNotas";
@@ -107,18 +108,18 @@ public class NotasController {
 	
 	@PostMapping(value= "actualizarnota")
 	public String modificarNota(
-			@RequestParam(value = "id", required = false) Integer id,
-			@RequestParam(value = "alumnos", required = false) Integer alumno,
-			@RequestParam(value = "asignaturas", required = false) Integer asignatura,
+			@RequestParam(value ="idNota") Integer idNota,
+			@RequestParam(value = "alumnos", required = false) Integer idAlumno,
+			@RequestParam(value = "asignaturas", required = false) Integer idAsignatura,
 			@RequestParam(value = "nota", required = false) Double nota,
 			@RequestParam(value = "fecha", required = false) String fecha, ModelMap model) {
 		
-		AlumnoEntity alumnoEntity = AlumnoR.findById(alumno).get();
-		AsignaturasEntity asignaturasEntity = AsigR.findById(asignatura).get();
+		AlumnoEntity alumnoEntity = alumnoR.findById(idAlumno).get();
+		AsignaturasEntity asignaturasEntity = asigR.findById(idAsignatura).get();
 		
-		NotaEntity notas = new NotaEntity(alumnoEntity, asignaturasEntity, nota, fecha, id);
+		NotaEntity notas = new NotaEntity(idNota,alumnoEntity, asignaturasEntity, nota, fecha);
 
-		NotaR.save(notas);
+		notaR.save(notas);
 		
 		return  "vistas/notas/actualizarNotas";
 	}
@@ -137,7 +138,7 @@ public class NotasController {
 			@RequestParam(value = "fecha", required = false) String fecha, 
 			ModelMap model) {
 
-		List<NotaDTO> listaNotas = NotaR.buscarPorAlumnoAsignaturaNotaFecha(null, alumno, asignatura, null,fecha);
+		List<NotaDTO> listaNotas = notaR.buscarPorAlumnoAsignaturaNotaFecha(null, alumno, asignatura, null,fecha);
 
 		model.addAttribute("lista", listaNotas);
 
@@ -146,13 +147,13 @@ public class NotasController {
 	
 	@PostMapping(value = "borrarnota")
 	public String borrarnota(
-			@RequestParam(value = "id", required = false) Integer id,
+			@RequestParam(value = "idNota", required = false) Integer idNota,
 			@RequestParam(value = "nombre", required = false) String nombre,
 			@RequestParam(value = "tasa", required = false) Double tasa,
 			@RequestParam(value = "curso", required = false) Integer curso, ModelMap model) {
 
-		NotaR.deleteById(id);
-
+		//notaR.deleteById(idNota);
+		model.addAttribute("resultado", notasDao.eliminarNota(idNota));
 		return "vistas/notas/borrarNotas";
 	}
 }

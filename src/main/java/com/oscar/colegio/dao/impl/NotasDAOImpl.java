@@ -45,21 +45,32 @@ public class NotasDAOImpl implements NotasDAO{
 	}
 
 	@Override
-	public Integer actualizarNota(Integer idNota, String idAlumno, String idAsignatura, Double nota, String fecha) {
-		//List<NotaDTO> listaNotas = NotaR.buscarPorAlumnoAsignaturaNotaFecha(idAlumno, idAlumno, idAsignatura, nota, fecha);
+	public Integer actualizarNota(Integer idNota, Integer idAlumno, Integer idAsignatura, Double nota, String fecha) {
+		AlumnoEntity alumnoEntity = AlumnoR.findById(idAlumno).get();
+		AsignaturasEntity asignaturasEntity = AsigR.findById(idAsignatura).get();
+		
+		NotaEntity notas = new NotaEntity(idNota,alumnoEntity, asignaturasEntity, nota, fecha);
+
+		NotaR.save(notas);
+
+	
 		return 1;
 	}
 
-	@Override
-	public Integer eliminarNota(Integer id) {
-		NotaR.deleteById(id);
-		return 1;
-	}
+
 
 	@Override
 	public List<NotaDTO> obtenerNotaPorNombreAsignaturaFecha(String nombre, String asignatura, String fecha) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	public Integer eliminarNota(Integer idNota) {
+		NotaR.deleteById(idNota);
+		return 1;
 	}
 
 
